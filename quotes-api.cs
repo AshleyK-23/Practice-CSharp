@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Program
 {
 	/* Quotes */
-	Dictionary<string, string> quote_dict = new Dictionary<string, string>(){
+	static Dictionary<string, string> quote_dict = new Dictionary<string, string>(){
 		{"no","No."},
 		{"yes","Yes."},
 		{"agree","That makes two of us."},
@@ -13,20 +13,31 @@ public class Program
 	};
 	
 	/* Repository */
-	public string getQuote(int key){
-		//string quote = quote_dict.at;
-		return "";
+	static string getQuote(string key){
+		return quote_dict[key];
 	}
 	
-	public string getQuote(string key){
-		string quote = quote_dict[key];
-		return quote;
+	static List<string> getKeys(){
+	    List<string> dict_keys = new List<string>(quote_dict.Keys);
+	    return dict_keys;
 	}
 	
 	/* Service */
-	public void Main()
+	static string selectQuote(string key){
+	    return getQuote(key);
+	}
+	
+	static string randomQuote(){
+	    Random rand = new Random();
+	    List<string> list_key = getKeys();
+	    string key = list_key[rand.Next(list_key.Count)];
+	    
+	    return getQuote(key);
+	}
+	
+	public static void Main()
 	{
-		Console.WriteLine("Hello World");
-		Console.WriteLine(getQuote("maybe"));
+		Console.WriteLine(selectQuote("no"));
+		Console.WriteLine(randomQuote());
 	}
 }
